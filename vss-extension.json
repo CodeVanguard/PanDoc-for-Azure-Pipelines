@@ -1,0 +1,56 @@
+{
+  "manifestVersion": 1,
+  "id": "code-vanguard-pandoc-tasks",
+  "name": "PanDoc Tools",
+  "version": "1.0.0",
+  "publisher": "CodeVanguard",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "Task for integrating PanDoc into your build and release pipelines.",
+  "categories": ["Azure Pipelines"],
+  "public": true,
+  "galleryFlags": ["Preview"],
+  "tags": ["Code Vanguard", "PanDoc", "Pan Doc", "Documentation", "Markdown", "docx"],
+  "icons": {
+    "default": "icon.png"
+  },
+  "branding": {
+    "color": "rgb(34, 34, 34)",
+    "theme": "dark"
+  },
+  "screenshots": [],
+  "content": {
+    "details": {
+      "path": "overview.md"
+    }
+  },
+  "files": [
+    { "path": "BuildAndReleaseTasks/Utilities" },
+    { "path": "BuildAndReleaseTasks/Tasks" },
+    { "path": "images", "addressable": true }
+  ],
+  "repository": {
+    "type": "git",
+    "uri": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines"
+  },
+  "badges": [
+      {
+          "href": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_build?definitionId=30",
+          "uri": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_apis/build/status/PanDoc%20for%20Azure%20Pipelines?branchName=master",
+          "description": "Pipelines build for main branch"
+      }
+  ],
+  "contributions": [
+    {
+      "id": "RunPanDoc",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"],
+      "properties": {
+        "name": "BuildAndReleaseTasks/Tasks/RunPanDoc"
+      }
+    }
+  ]
+}

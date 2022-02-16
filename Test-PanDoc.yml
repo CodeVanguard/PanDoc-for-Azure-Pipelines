@@ -1,0 +1,21 @@
+# This file is part of PanDoc for Azure Pipelines,
+# Copyright (C) 2020-2022 Code Vanguard LLC
+
+trigger: none
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: RunPanDoc@1
+  inputs:
+    sourceFile: '$(System.DefaultWorkingDirectory)/Test/test.md'
+    inputFormat: 'gfm'
+    outputFormat: 'html5'
+    destFile: '$(Build.ArtifactStagingDirectory)/test.html'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
