@@ -18,7 +18,7 @@ $outputFormat = Get-VstsInput -Name outputFormat -Require
 $destFile = Get-VstsInput -Name destFile -Require
 
 Write-Host "Pandoc Version Information:\r\n"
-. $PSScriptRoot\..\Utilities\PrintPanDocVersion.ps1
+. $PSScriptRoot\Lib\Pandoc\pandoc.exe -v
 
 Write-Host "\r\nLocal variable information:\r\n"
 Write-Host "SourceFile  = `t$sourceFile"
