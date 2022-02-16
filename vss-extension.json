@@ -38,8 +38,8 @@
   ],
   "badges": [
     {
-      "href": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_build?definitionId=30",
-      "uri": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_apis/build/status/PanDoc%20for%20Azure%20Pipelines?branchName=master",
+      "href": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_build?definitionId=49",
+      "uri": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_apis/build/status/Package%20and%20Publish?branchName=main",
       "description": "Pipelines build for main branch"
     }
   ],
