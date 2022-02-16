@@ -23,7 +23,7 @@ steps:
       BuildNumber: "Package Tasks $(VersionNumber)"
 
   - task: PowerShell@2
-    displayName: "Prepare extension for packaging"
+    displayName: Prepare extension for packaging
     inputs:
       filePath: "$(System.DefaultWorkingDirectory)/ci/PrepareForPackaging.ps1"
 
@@ -32,7 +32,7 @@ steps:
       version: 'v0.10.x'
 
   - task: PackageAzureDevOpsExtension@3
-    displayName: "Pacakage extension"
+    displayName: Pacakage extension
     inputs:
       rootFolder: "$(System.DefaultWorkingDirectory)"
       patternManifest: "vss-extension.json"
@@ -44,18 +44,20 @@ steps:
       extensionVersion: "$(VersionNumber)"
 
   - task: CopyFiles@2
-    displayName: "Copy VSIX to artifacts staging directory"
+    displayName: Copy VSIX to artifacts staging directory
     inputs:
       Contents: "**/*.vsix"
       TargetFolder: "$(Build.ArtifactStagingDirectory)"
 
   - task: PublishBuildArtifacts@1
+    displayName: Publish build artifacts
     inputs:
       PathtoPublish: "$(Build.ArtifactStagingDirectory)"
       ArtifactName: "drop"
       publishLocation: "Container"
 
   - task: PublishAzureDevOpsExtension@3
+    displayName: Publish Extension to Marketplace
     inputs:
       connectTo: 'VsTeam'
       connectedServiceName: 'Marketplace Connection'
