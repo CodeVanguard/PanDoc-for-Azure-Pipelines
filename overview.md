@@ -1,6 +1,6 @@
 # Overview
 
-A wrapper for the [PanDoc](https://pandoc.org/) tool.
+An Azure Pipeline task that allows you to run the [PanDoc](https://pandoc.org/) tool in your pipelines.
 
 # Usage
 The extensions supports use of the assistant view to help you to configure your PanDoc.
