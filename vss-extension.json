@@ -4,35 +4,34 @@
   "name": "PanDoc Tools",
   "version": "1.0.0",
   "publisher": "CodeVanguard",
-  "targets": [
-    {
-      "id": "Microsoft.VisualStudio.Services"
-    }
-  ],
+  "targets": [ { "id": "Microsoft.VisualStudio.Services" } ],
   "description": "Task for integrating PanDoc into your build and release pipelines.",
   "categories": [ "Azure Pipelines" ],
   "public": true,
-  "galleryFlags": [ "Preview" ],
   "tags": [ "Code Vanguard", "PanDoc", "Pan Doc", "Documentation", "Markdown", "docx" ],
-  "icons": {
-    "default": "icon.png"
-  },
+  "icons": { "default": "icon.png" },
   "branding": {
     "color": "rgb(34, 34, 34)",
     "theme": "dark"
   },
   "screenshots": [],
+  "links": {
+    "home": {
+      "uri": "https://github.com/CodeVanguard/PanDoc-for-Azure-Pipelines"
+    },
+    "support": {
+      "uri": "https://github.com/CodeVanguard/PanDoc-for-Azure-Pipelines/issues"
+    }
+  },
   "repository": {
     "type": "git",
     "uri": "https://github.com/CodeVanguard/PanDoc-for-Azure-Pipelines"
   },
   "content": {
-    "details": {
-      "path": "overview.md"
-    }
+    "details": { "path": "overview.md" },
+    "license": { "path": "license.md" }
   },
   "files": [
-    { "path": "BuildAndReleaseTasks/Utilities" },
     { "path": "BuildAndReleaseTasks/Tasks" },
     { "path": "images", "addressable": true }
   ],
