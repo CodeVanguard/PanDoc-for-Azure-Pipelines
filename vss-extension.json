@@ -4,49 +4,54 @@
   "name": "PanDoc Tools",
   "version": "1.0.0",
   "publisher": "CodeVanguard",
-  "targets": [ { "id": "Microsoft.VisualStudio.Services" } ],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
   "description": "Task for integrating PanDoc into your build and release pipelines.",
-  "categories": [ "Azure Pipelines" ],
+  "categories": ["Azure Pipelines"],
   "public": true,
-  "tags": [ "Code Vanguard", "PanDoc", "Pan Doc", "Documentation", "Markdown", "docx" ],
-  "icons": { "default": "icon.png" },
+  "galleryFlags": ["Preview"],
+  "tags": ["Code Vanguard", "PanDoc", "Pan Doc", "Documentation", "Markdown", "docx"],
+  "icons": {
+    "default": "icon.png"
+  },
   "branding": {
     "color": "rgb(34, 34, 34)",
     "theme": "dark"
   },
   "screenshots": [],
-  "links": {
-    "home": {
-      "uri": "https://github.com/CodeVanguard/PanDoc-for-Azure-Pipelines"
-    },
-    "support": {
-      "uri": "https://github.com/CodeVanguard/PanDoc-for-Azure-Pipelines/issues"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "uri": "https://github.com/CodeVanguard/PanDoc-for-Azure-Pipelines"
-  },
   "content": {
-    "details": { "path": "overview.md" },
-    "license": { "path": "license.md" }
+    "details": {
+      "path": "overview.md"
+    },
+    "privacypolicy": {
+      "path": "privacypolicy.md"
+    }
   },
   "files": [
-    { "path": "BuildAndReleaseTasks/Tasks" },
-    { "path": "images", "addressable": true }
-  ],
-  "badges": [
     {
-      "href": "https://github.com/CodeVanguard/PanDoc-for-Azure-Pipelines",
-      "uri": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_apis/build/status/Package%20and%20Publish?branchName=main",
-      "description": "Build for main branch"
-    }
+      "path": "BuildAndReleaseTasks/Utilities"
+    },
+    { "path": "BuildAndReleaseTasks/Tasks" }
+  ],
+  "repository": {
+    "type": "git",
+    "uri": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines"
+  },
+  "badges": [
+      {
+          "href": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_build?definitionId=30",
+          "uri": "https://dev.azure.com/CodeVanguard/PanDoc%20for%20Azure%20Pipelines/_apis/build/status/PanDoc%20for%20Azure%20Pipelines?branchName=master",
+          "description": "Pipelines build for main branch"
+      }
   ],
   "contributions": [
     {
       "id": "RunPanDoc",
       "type": "ms.vss-distributed-task.task",
-      "targets": [ "ms.vss-distributed-task.tasks" ],
+      "targets": ["ms.vss-distributed-task.tasks"],
       "properties": {
         "name": "BuildAndReleaseTasks/Tasks/RunPanDoc"
       }
