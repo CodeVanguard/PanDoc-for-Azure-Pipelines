@@ -1,6 +1,7 @@
 # Privacy Policy
 
-PanDoc is an open source extension created by [Code Vanguard, LLC][1] for [Azure DevOps Services][2]. This privacy statement explains data collection and use practices for the extension.
+"PanDoc for Azure Pipelines" is an open source extension created by [Code Vanguard, LLC][1] for [Azure DevOps Services][2].
+This privacy statement explains data collection and use practices for the extension.
 
 ## Data Collection
 

@@ -32,7 +32,7 @@ steps:
       version: 'v0.10.x'
 
   - task: PackageAzureDevOpsExtension@3
-    displayName: Pacakage extension
+    displayName: Package extension
     inputs:
       rootFolder: "$(System.DefaultWorkingDirectory)"
       patternManifest: "vss-extension.json"
