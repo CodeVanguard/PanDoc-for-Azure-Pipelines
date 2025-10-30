@@ -24,10 +24,10 @@ $DownloadUrl = "https://github.com/jgm/pandoc/releases/download/3.8/pandoc-3.8-w
 $ExpectedHash = "3c72ee9966d2a35ebb59873967e496f5fe745c15cf9e825947dc745d19b36bad"
 
 # Local temporary download path
-$DownloadPath = "$(Agent.TempDirectory)\pandoc.zip"
+$DownloadPath = Join-Path $env:AGENT_TEMPDIRECTORY 'pandoc.zip'
 
 # Target directory where pandoc.exe should be copied
-$TargetDir = "$(Agent.TempDirectory)\PanDoc\"
+$TargetDir   = Join-Path $env:AGENT_TEMPDIRECTORY 'pandoc'
 
 Write-Host "Downloading Pandoc..."
 Invoke-WebRequest -Uri $DownloadUrl -OutFile $DownloadPath
@@ -42,7 +42,7 @@ if ($FileHash -ne $ExpectedHash.ToUpper()) {
 Write-Host "Hash verification successful."
 
 Write-Host "Extracting archive..."
-$ExtractPath = "$(Agent.TempDirectory)\pandoc_extract"
+$ExtractPath = Join-Path $env:AGENT_TEMPDIRECTORY 'pandoc_extract'
 if (Test-Path $ExtractPath) { Remove-Item $ExtractPath -Recurse -Force }
 Expand-Archive -Path $DownloadPath -DestinationPath $ExtractPath
 
