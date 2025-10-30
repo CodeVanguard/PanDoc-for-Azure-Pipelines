@@ -35,6 +35,7 @@ $sourceFiles    = Get-VstsInput -Name sourceFile -Require
 $inputFormat    = Get-VstsInput -Name inputFormat -Require
 $outputFormat   = Get-VstsInput -Name outputFormat -Require
 $destFile       = Get-VstsInput -Name destFile -Require
+$additionalArgs = Get-VstsInput -Name additionalArgs -Default ""
 
 try {
     $pandocCmd = (Get-Command 'pandoc.exe' -ErrorAction Stop).Path
@@ -54,8 +55,9 @@ Write-Host "SourceFile(s): `t`t$sourceFiles"
 Write-Host "InputFormat: `t`t$inputFormat"
 Write-Host "OutputFormat: `t`t$outputFormat"
 Write-Host "DestinationFile: `t$destFile"
+Write-Host "Additional Arguments: `t$additionalArgs"
 
-$commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $sourceFiles"
+$commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $sourceFiles $additionalArgs"
 Start-Process -FilePath "pandoc.exe" -ArgumentList $commandArgs -NoNewWindow -Wait
 
 Write-Verbose 'Leaving RunPanDoc.ps1'

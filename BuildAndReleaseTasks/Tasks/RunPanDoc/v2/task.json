@@ -154,6 +154,14 @@
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "The destination file"
+    },
+    {
+      "name": "additionalArgs",
+      "type": "string",
+      "label": "Additional Arguments",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Additional arguments for the command. Use this to specify any options not covered by other inputs. Example: --lua-filter=myfilter.lua"
     }
   ],
   "execution": {
