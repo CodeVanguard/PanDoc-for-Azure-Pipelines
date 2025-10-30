@@ -20,12 +20,12 @@
   "instanceNameFormat": "Run PanDoc",
   "inputs": [
     {
-      "name": "sourceFile",
+      "name": "sourceFiles",
       "type": "string",
-      "label": "Source File(s)",
+      "label": "Source Files",
       "defaultValue": "",
       "required": true,
-      "helpMarkDown": "One or more source files"
+      "helpMarkDown": "One or more source files, separated by spaces"
     },
     {
       "name": "inputFormat",
@@ -162,6 +162,14 @@
       "defaultValue": "",
       "required": false,
       "helpMarkDown": "Additional arguments for the command. Use this to specify any options not covered by other inputs. Example: --lua-filter=myfilter.lua"
+    },
+    {
+      "name": "workingDirectory",
+      "type": "string",
+      "label": "Working Directory",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "The working directory for the command. Example: /path/to/working/directory. Defaults to the agent's default working directory."
     }
   ],
   "execution": {
