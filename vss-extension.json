@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "code-vanguard-pandoc-tasks",
   "name": "PanDoc Tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "CodeVanguard",
   "targets": [
     {
@@ -44,7 +44,7 @@
   },
   "content": {
     "details": {
-      "path": "overview.md"
+      "path": "README.md"
     },
     "license": {
       "path": "license.md"

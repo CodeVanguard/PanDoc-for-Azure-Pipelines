@@ -24,6 +24,9 @@ $ErrorActionPreference = "Stop"
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 Write-Host "Script Path: $scriptPath"
 
+Write-Host "Calling DownloadPandoc.ps1"
+. "$scriptPath/DownloadPandoc.ps1"
+
 Write-Host "Calling AddVstsTaskSdk.ps1"
 . "$scriptPath/AddVstsTaskSdk.ps1"
 
