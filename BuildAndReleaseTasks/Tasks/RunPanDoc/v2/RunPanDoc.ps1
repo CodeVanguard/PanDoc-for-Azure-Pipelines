@@ -38,7 +38,7 @@ $destFile       = Get-VstsInput -Name destFile -Require
 $additionalArgs = Get-VstsInput -Name additionalArgs -Default ""
 
 # Get working directory, default to agent's build directory
-$workingDirectory = Get-VstsInput -Name workingDirectory -Default $env:AGENT_BUILDDIRECTORY
+$workingDirectory = Get-VstsInput -Name workingDirectory -Default $env:PIPELINE_WORKSPACE
 
 try {
     $pandocCmd = (Get-Command 'pandoc.exe' -ErrorAction Stop).Path

@@ -167,7 +167,7 @@
       "name": "workingDirectory",
       "type": "string",
       "label": "Working Directory",
-      "defaultValue": "",
+      "defaultValue": "$(Pipeline.Workspace)",
       "required": false,
       "helpMarkDown": "The working directory for the command. Example: /path/to/working/directory. Defaults to the agent's default working directory."
     }
