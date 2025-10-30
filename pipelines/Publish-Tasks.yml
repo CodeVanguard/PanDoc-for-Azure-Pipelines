@@ -43,3 +43,4 @@ stages:
           - template: templates/PublishVsix.yml
             parameters:
               VsixName: $(VsixName)
+              extensionVisibility: "public"
