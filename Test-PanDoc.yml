@@ -9,6 +9,8 @@ pool:
 steps:
 - task: DownloadPanDoc@1
 
+- task: PrintDirectoryContents@0
+
 - task: RunPanDoc@2
   inputs:
     sourceFile: '$(System.DefaultWorkingDirectory)/Test/test.md'
