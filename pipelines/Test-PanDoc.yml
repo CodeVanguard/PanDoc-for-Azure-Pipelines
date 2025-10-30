@@ -10,7 +10,7 @@ steps:
 - task: DownloadPanDoc@2
 - task: RunPanDoc@2
   inputs:
-    sourceFile: '''$(System.DefaultWorkingDirectory)/Test/test.md'''
+    sourceFile: '$(System.DefaultWorkingDirectory)/Test/test.md'
     inputFormat: 'gfm'
     outputFormat: 'html5'
     destFile: '$(Build.ArtifactStagingDirectory)/test.html'
