@@ -57,7 +57,7 @@ Write-Host "OutputFormat: `t`t$outputFormat"
 Write-Host "DestinationFile: `t$destFile"
 Write-Host "Additional Arguments: `t$additionalArgs"
 
-$commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $sourceFiles $additionalArgs"
+$commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $additionalArgs"
 Start-Process -FilePath "pandoc.exe" -ArgumentList $commandArgs -NoNewWindow -Wait
 
 Write-Verbose 'Leaving RunPanDoc.ps1'

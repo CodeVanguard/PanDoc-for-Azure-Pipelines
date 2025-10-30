@@ -11,7 +11,9 @@ The assistant will help you to choose the supported input and output formats.
 
 ![Format parameters](images/formats.PNG)
 
-# Sample YAML
+# Sample 
+
+Before using the `RunPanDoc` tool, run the `DownloadPanDoc` stage. This will install the latest version of PanDoc.
 
 Below is a sample YAML entry for executing the PanDoc tool.
 
@@ -23,6 +25,7 @@ Below is a sample YAML entry for executing the PanDoc tool.
     inputFormat: 'gfm'
     outputFormat: 'html5'
     destFile: '$(Build.ArtifactStagingDirectory)/test.html'
+    additionalArgs: '--toc'
 ```
 
 # Argument
