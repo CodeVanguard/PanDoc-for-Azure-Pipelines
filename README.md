@@ -5,11 +5,11 @@ An Azure Pipeline task that allows you to run the [PanDoc](https://pandoc.org/) 
 # Usage
 The extensions supports use of the assistant view to help you to configure your PanDoc.
 
-![Assistant view](images/assistant.png)
+![Assistant view](images/assistant.PNG)
 
 The assistant will help you to choose the supported input and output formats.
 
-![Format parameters](images/formats.png)
+![Format parameters](images/formats.PNG)
 
 # Sample YAML
 
