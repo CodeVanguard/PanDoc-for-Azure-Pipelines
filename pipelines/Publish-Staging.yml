@@ -45,26 +45,8 @@ stages:
   displayName: "Testing extension in staging"
 
   jobs:
-    - job: InstallStaging
-      displayName: "Install staging version"
-      steps:      
-        - task: TfxInstaller@5
-          displayName: "Install Azure DevOps tools"
-          inputs:
-            version: builtin
-
-        - task: InstallAzureDevOpsExtension@5
-          inputs:
-            connectTo: 'VsTeam'
-            connectedServiceName: 'Marketplace Connection'
-            method: 'id'
-            publisherId: 'CodeVanguard'
-            extensionId: 'pandoc-staging'
-            accounts: 'https://dev.azure.com/CodeVanguard'
-
     - job: RunTool
       displayName: "Running latest version of tool"
-
       steps:      
         - task: DownloadPanDoc@2
         
