@@ -1,12 +1,15 @@
 {
-  "id": "32750f70-d31e-4713-808d-05bde706d27a",
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+  "id": "4aa2ce23-f86a-47cd-acce-89268affd710",
   "name": "DownloadPanDoc",
   "friendlyName": "Download PanDoc",
   "description": "Downloads the PanDoc tool",
   "author": "Code Vanguard",
   "helpMarkDown": "Downloads the PanDoc tool.",
   "category": "Azure Pipelines",
-  "visibility": ["Build"],
+  "visibility": [
+    "Build"
+  ],
   "demands": [],
   "version": {
     "Major": 1,
