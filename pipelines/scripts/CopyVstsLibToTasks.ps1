@@ -1,5 +1,5 @@
 # This file is part of PanDoc for Azure Pipelines,
-# Copyright (C) 2020-2022 Code Vanguard LLC
+# Copyright (C) 2020-2025 Code Vanguard LLC
 #
 # PanDoc for Azure Pipelines is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
