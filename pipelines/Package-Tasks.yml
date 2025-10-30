@@ -14,6 +14,7 @@ steps:
     displayName: Creates the version variables
     inputs:
       MajorVersion: "1"
+      MinorVersion: "0"
       PatchVersion: "$(Build.BuildId)"
 
     # Rename build
