@@ -7,9 +7,7 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: DownloadPanDoc@1
-
-- task: PrintDirectoryContents@0
+- task: DownloadPanDoc@2
 
 - task: RunPanDoc@2
   inputs:
