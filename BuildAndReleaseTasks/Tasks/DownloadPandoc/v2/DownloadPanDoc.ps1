@@ -1,5 +1,5 @@
 # This file is part of PanDoc for Azure Pipelines,
-# Copyright (C) 2020-2022 Code Vanguard LLC
+# Copyright (C) 2025 Lukas Grützmacher
 #
 # PanDoc for Azure Pipelines is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
@@ -13,22 +13,17 @@
 # You should have received a copy of the GNU General Public License
 # along with PanDoc for Azure Pipelines.  If not, see <http://www.gnu.org/licenses/>.
 
-# PrepareForPackaging.ps1
+# DownloadPandoc.ps1
 # 
-# Prepares project for packaging
-#
+# Downloads, verifies and installs PanDoc
 
-$ErrorActionPreference = "Stop"
+Write-Host "Downloading Pandoc..."
 
-#Script Location
-$scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
-Write-Host "Script Path: $scriptPath"
+# Reduce noisy console output from Chocolatey in CI logs
+#  - --no-progress hides the percentage bars
+#  - --limit-output (-r) limits output to essentials
+# NOTE: Avoid using global feature toggles to keep agent state clean
+choco install pandoc -y --no-progress --limit-output
 
-Write-Host "Calling AddVstsTaskSdk.ps1"
-. "$scriptPath/AddVstsTaskSdk.ps1"
-
-Write-Host "Calling CopyVstsLibToTasks.ps1"
-. "$scriptPath/CopyVstsLibToTasks.ps1"
-
-Write-Host "Calling CopyIconToTasks.ps1"
-. "$scriptPath/CopyIconToTasks.ps1"
+# Set output variable for the Pandoc path
+Write-Host "##vso[task.setvariable variable=PandocInstalled]true"

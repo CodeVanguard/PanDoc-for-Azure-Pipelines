@@ -1,0 +1,22 @@
+# This file is part of PanDoc for Azure Pipelines,
+# Copyright (C) 2020-2022 Code Vanguard LLC
+
+trigger: none
+
+pool:
+  vmImage: "windows-latest"
+  
+variables:
+  VsixName: "CodeVanguard.code-vanguard-pandoc.vsix" # $(VsixName)
+
+steps:
+  - template: templates/VersionBuild.yml
+
+  - template: templates/PreparePackage.yml
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish build artifacts
+    inputs:
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: "drop"
+      publishLocation: "Container"
