@@ -24,10 +24,10 @@ $DownloadUrl = "https://github.com/jgm/pandoc/releases/download/3.8/pandoc-3.8-w
 $ExpectedHash = "3c72ee9966d2a35ebb59873967e496f5fe745c15cf9e825947dc745d19b36bad"
 
 # Local temporary download path
-$DownloadPath = "$env:TEMP\pandoc.zip"
+$DownloadPath = "$(Agent.TempDirectory)\pandoc.zip"
 
 # Target directory where pandoc.exe should be copied
-$TargetDir = "$PSScriptRoot\..\BuildAndReleaseTasks\Tasks\RunPanDoc\Lib\PanDoc\"
+$TargetDir = "$(Agent.TempDirectory)\PanDoc\"
 
 Write-Host "Downloading Pandoc..."
 Invoke-WebRequest -Uri $DownloadUrl -OutFile $DownloadPath
@@ -42,7 +42,7 @@ if ($FileHash -ne $ExpectedHash.ToUpper()) {
 Write-Host "Hash verification successful."
 
 Write-Host "Extracting archive..."
-$ExtractPath = "$env:TEMP\pandoc_extract"
+$ExtractPath = "$(Agent.TempDirectory)\pandoc_extract"
 if (Test-Path $ExtractPath) { Remove-Item $ExtractPath -Recurse -Force }
 Expand-Archive -Path $DownloadPath -DestinationPath $ExtractPath
 
@@ -62,3 +62,9 @@ Copy-Item -Path $PandocExe.FullName -Destination $TargetDir -Force
 Write-Host "Pandoc was successfully installed to $TargetDir"
 
 Remove-Item $ExtractPath -Recurse -Force
+
+# Add Pandoc to the PATH for subsequent tasks
+Write-Host "##vso[task.prependpath]$TargetDir"
+
+# Set output variable for the Pandoc path
+Write-Host "##vso[task.setvariable variable=PanDocDownloaded]true"

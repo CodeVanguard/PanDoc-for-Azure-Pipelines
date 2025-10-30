@@ -24,6 +24,12 @@ Write-Verbose 'Entering RunPanDoc.ps1'
 Write-Host "Build and release tools brought to you by Code Vanguard. For more help on your build and release process, reach out to us at https://www.codevanguard.com"
 Write-Host "Copyright (C) 2020-2022 Code Vanguard LLC"
 
+# Check if Pandoc was downloaded
+if (($env:PanDocDownloaded -ne 'true')) {
+    Write-Error "Please make sure the DownloadPanDoc task has been run before this task."
+    exit 1
+}
+
 #Get Parameters
 $sourceFiles = Get-VstsInput -Name sourceFile -Require
 $inputFormat = Get-VstsInput -Name inputFormat -Require
@@ -32,7 +38,7 @@ $destFile = Get-VstsInput -Name destFile -Require
 
 Write-Host "`n"
 Write-Host "Pandoc Version Information:"
-. $PSScriptRoot\Lib\Pandoc\pandoc.exe -v
+. pandoc.exe -v
 
 Write-Host "`n"
 Write-Host "Local variable information:"
@@ -42,6 +48,6 @@ Write-Host "OutputFormat: `t`t$outputFormat"
 Write-Host "DesinationFile: `t$destFile"
 
 $commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $sourceFiles"
-Start-Process -FilePath "$PSScriptRoot\Lib\Pandoc\pandoc.exe" -ArgumentList $commandArgs -NoNewWindow -Wait
+Start-Process -FilePath "pandoc.exe" -ArgumentList $commandArgs -NoNewWindow -Wait
 
 Write-Verbose 'Leaving RunPanDoc.ps1'
