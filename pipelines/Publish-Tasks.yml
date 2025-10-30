@@ -14,6 +14,7 @@ steps:
     displayName: Creates the version variables
     inputs:
       MajorVersion: "1"
+      MinorVersion: "0"
       PatchVersion: "$(Build.BuildId)"
 
     # Rename build
@@ -27,11 +28,11 @@ steps:
     inputs:
       filePath: "$(System.DefaultWorkingDirectory)/ci/PrepareForPackaging.ps1"
 
-  - task: TfxInstaller@3
+  - task: TfxInstaller@5
     inputs:
-      version: 'v0.10.x'
+      version: builtin
 
-  - task: PackageAzureDevOpsExtension@3
+  - task: PackageAzureDevOpsExtension@5
     displayName: Pacakage extension
     inputs:
       rootFolder: "$(System.DefaultWorkingDirectory)"
@@ -56,7 +57,7 @@ steps:
       ArtifactName: "drop"
       publishLocation: "Container"
 
-  - task: PublishAzureDevOpsExtension@3
+  - task: PublishAzureDevOpsExtension@5
     displayName: Publish Extension to Marketplace
     inputs:
       connectTo: 'VsTeam'

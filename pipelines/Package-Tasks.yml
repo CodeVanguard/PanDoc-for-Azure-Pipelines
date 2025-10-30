@@ -1,0 +1,58 @@
+# This file is part of PanDoc for Azure Pipelines,
+# Copyright (C) 2020-2022 Code Vanguard LLC
+
+trigger: none
+
+pool:
+  vmImage: "windows-latest"
+  
+variables:
+  VsixName: "CodeVanguard.code-vanguard-pandoc.vsix" # $(VsixName)
+
+steps:
+  - task: CreateVersionVariables@0
+    displayName: Creates the version variables
+    inputs:
+      MajorVersion: "1"
+      MinorVersion: "0"
+      PatchVersion: "$(Build.BuildId)"
+
+    # Rename build
+  - task: RenameBuild@0
+    displayName: Rename build
+    inputs:
+      BuildNumber: "Package Tasks $(VersionNumber)"
+
+  - task: PowerShell@2
+    displayName: Prepare extension for packaging
+    inputs:
+      filePath: "$(System.DefaultWorkingDirectory)/ci/PrepareForPackaging.ps1"
+
+  - task: TfxInstaller@5
+    inputs:
+      version: builtin
+
+  - task: PackageAzureDevOpsExtension@5
+    displayName: Pacakage extension
+    inputs:
+      rootFolder: "$(System.DefaultWorkingDirectory)"
+      patternManifest: "vss-extension.json"
+      outputPath: "$(VsixName)"
+      updateTasksVersion: true
+      updateTasksVersionType: "minor"
+      extensionVisibility: "public"
+      extensionPricing: "free"
+      extensionVersion: "$(VersionNumber)"
+
+  - task: CopyFiles@2
+    displayName: Copy VSIX to artifacts staging directory
+    inputs:
+      Contents: "**/*.vsix"
+      TargetFolder: "$(Build.ArtifactStagingDirectory)"
+
+  - task: PublishBuildArtifacts@1
+    displayName: Publish build artifacts
+    inputs:
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: "drop"
+      publishLocation: "Container"
