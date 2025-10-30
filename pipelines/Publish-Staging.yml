@@ -40,3 +40,35 @@ stages:
           - template: templates/PublishVsix.yml
             parameters:
               VsixName: $(VsixName)
+
+- stage: TestExtension
+  displayName: "Testing extension in staging"
+
+  jobs:
+    - job: InstallStaging
+      steps:
+        - task: InstallAzureDevOpsExtension@5
+          inputs:
+            connectTo: 'VsTeam'
+            connectedServiceName: 'Marketplace Connection'
+            method: 'id'
+            publisherId: 'CodeVanguard'
+            extensionId: 'pandoc-staging'
+            accounts: 'https://dev.azure.com/CodeVanguard'
+
+        - task: DownloadPanDoc@2
+          displayName: "Downloading PanDoc"
+
+        - task: RunPanDoc@2
+          displayName: "Testing PanDoc"
+          inputs:
+            sourceFile: '$(System.DefaultWorkingDirectory)/Test/test.md'
+            inputFormat: 'gfm'
+            outputFormat: 'html5'
+            destFile: '$(Build.ArtifactStagingDirectory)/test.html'
+
+        - task: PublishBuildArtifacts@1
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
