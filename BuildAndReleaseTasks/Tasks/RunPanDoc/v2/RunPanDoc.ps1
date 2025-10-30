@@ -35,7 +35,7 @@ $sourceFiles    = Get-VstsInput -Name sourceFile -Require
 $inputFormat    = Get-VstsInput -Name inputFormat -Require
 $outputFormat   = Get-VstsInput -Name outputFormat -Require
 $destFile       = Get-VstsInput -Name destFile -Require
-$additionalArgs = Get-VstsInput -Name additionalArgs -DefaultValue ""
+$additionalArgs = Get-VstsInput -Name additionalArgs -Default ""
 
 try {
     $pandocCmd = (Get-Command 'pandoc.exe' -ErrorAction Stop).Path
