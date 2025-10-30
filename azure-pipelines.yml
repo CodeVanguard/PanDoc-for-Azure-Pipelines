@@ -13,8 +13,15 @@ steps:
   inputs:
     sourceFile: '$(System.DefaultWorkingDirectory)/README.md'
     inputFormat: 'gfm'
+    outputFormat: 'html5'
+    destFile: '$(Build.ArtifactStagingDirectory)/README.html'
+
+- task: RunPanDoc@2
+  inputs:
+    sourceFile: '$(System.DefaultWorkingDirectory)/README.md'
+    inputFormat: 'gfm'
     outputFormat: 'docx'
-    destFile: '$(Build.ArtifactStagingDirectory)/test.docx'
+    destFile: '$(Build.ArtifactStagingDirectory)/README.docx'
 
 - task: PublishBuildArtifacts@1
   inputs:
