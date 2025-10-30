@@ -18,14 +18,17 @@ Before using the `RunPanDoc` tool, run the `DownloadPanDoc` stage. This will ins
 Below is a sample YAML entry for executing the PanDoc tool.
 
 ```yaml
-- task: RunPanDoc@1
+- task: DownloadPanDoc@2
+
+- task: RunPanDoc@2
   displayName: Convert Github Markdown to HTML
   inputs:
-    sourceFile: '$(System.DefaultWorkingDirectory)/Test/test.md'
+    sourceFiles: '$(System.DefaultWorkingDirectory)/Test/test.md'
     inputFormat: 'gfm'
     outputFormat: 'html5'
     destFile: '$(Build.ArtifactStagingDirectory)/test.html'
     additionalArgs: '--toc'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 ```
 
 # Argument
