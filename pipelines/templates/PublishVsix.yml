@@ -1,6 +1,12 @@
 parameters:
   - name: VsixName
     type: string
+  - name: extensionVisibility
+    type: string
+    values:
+    - private  
+    - public 
+    default: private
 
 steps:
   - task: TfxInstaller@5
@@ -23,7 +29,7 @@ steps:
       fileType: "vsix"
       vsixFile: "$(Pipeline.Workspace)/${{ parameters.VsixName }}"
       extensionVersion: "$(Build.BuildNumber)"
-      extensionVisibility: 'private'
+      extensionVisibility: ${{ parameters.extensionVisibility }}
       extensionPricing: 'free'
       updateTasksVersion: false
       noWaitValidation:  true

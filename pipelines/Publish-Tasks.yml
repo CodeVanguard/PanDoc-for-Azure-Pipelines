@@ -9,61 +9,38 @@ pool:
 variables:
   VsixName: "CodeVanguard.code-vanguard-pandoc.vsix" # $(VsixName)
 
-steps:
-  - task: CreateVersionVariables@0
-    displayName: Creates the version variables
-    inputs:
-      MajorVersion: "1"
-      MinorVersion: "0"
-      PatchVersion: "$(Build.BuildId)"
+stages:
+- stage: DeployToProduction
+  displayName: "Deploy to Production"
 
-    # Rename build
-  - task: RenameBuild@0
-    displayName: Rename build
-    inputs:
-      BuildNumber: "Package Tasks $(VersionNumber)"
+  jobs:
+  - job: Build
+    steps:
+      - template: templates/VersionBuild.yml    
 
-  - task: PowerShell@2
-    displayName: Prepare extension for packaging
-    inputs:
-      filePath: "$(System.DefaultWorkingDirectory)/ci/PrepareForPackaging.ps1"
+      - template: templates/PreparePackage.yml
+        parameters:
+          vsixName: $(VsixName)
+          extensionName: "PanDoc Tools"
+          extensionId: "code-vanguard-pandoc-tasks"
+          extensionVisibility: "public"
 
-  - task: TfxInstaller@5
-    inputs:
-      version: builtin
-
-  - task: PackageAzureDevOpsExtension@5
-    displayName: Pacakage extension
-    inputs:
-      rootFolder: "$(System.DefaultWorkingDirectory)"
-      patternManifest: "vss-extension.json"
-      outputPath: "$(VsixName)"
-      updateTasksVersion: true
-      updateTasksVersionType: "minor"
-      extensionVisibility: "public"
-      extensionPricing: "free"
-      extensionVersion: "$(VersionNumber)"
-
-  - task: CopyFiles@2
-    displayName: Copy VSIX to artifacts staging directory
-    inputs:
-      Contents: "**/*.vsix"
-      TargetFolder: "$(Build.ArtifactStagingDirectory)"
-
-  - task: PublishBuildArtifacts@1
-    displayName: Publish build artifacts
-    inputs:
-      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-      ArtifactName: "drop"
-      publishLocation: "Container"
-
-  - task: PublishAzureDevOpsExtension@5
-    displayName: Publish Extension to Marketplace
-    inputs:
-      connectTo: 'VsTeam'
-      connectedServiceName: 'Marketplace Connection'
-      fileType: 'vsix'
-      vsixFile: '$(Build.ArtifactStagingDirectory)/$(VsixName)'
-      extensionVersion: '$(VersionNumber)'
-      extensionVisibility: 'publicpreview'
-      extensionPricing: 'free'
+      - task: PublishBuildArtifacts@1
+        displayName: Publish build artifacts
+        inputs:
+          PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+          ArtifactName: "drop"
+          publishLocation: "Container"
+  
+  - deployment: Publish
+    displayName: "Deploy to production"
+    environment: "Production"
+    dependsOn: 'Build'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: templates/PublishVsix.yml
+            parameters:
+              VsixName: $(VsixName)
+              extensionVisibility: "public"

@@ -26,7 +26,7 @@ Write-Host "Adding Vsts Task PowerShell Sdk"
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 Write-Host "Script Path: $scriptPath"
 
-$LibLocation = "$scriptPath/../BuildAndReleaseTasks/Lib"
+$LibLocation = "$scriptPath/../../BuildAndReleaseTasks/Lib"
 Write-Verbose "Installing SDK to $LibLocation"
 
 If ((test-path $LibLocation)) {
