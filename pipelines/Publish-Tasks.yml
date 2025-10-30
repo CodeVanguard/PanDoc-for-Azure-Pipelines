@@ -57,7 +57,7 @@ steps:
       ArtifactName: "drop"
       publishLocation: "Container"
 
-  - task: PublishAzureDevOpsExtension@3
+  - task: PublishAzureDevOpsExtension@5
     displayName: Publish Extension to Marketplace
     inputs:
       connectTo: 'VsTeam'
