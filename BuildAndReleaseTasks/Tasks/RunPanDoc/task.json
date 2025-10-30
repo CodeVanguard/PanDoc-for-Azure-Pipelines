@@ -9,7 +9,7 @@
   "visibility": ["Build"],
   "demands": [],
   "version": {
-    "Major": 1,
+    "Major": 2,
     "Minor": 0,
     "Patch": 0
   },
@@ -66,7 +66,7 @@
         "odt": "OpenDocument text document",
         "opml": "OPML",
         "org": "Emacs Org mode",
-        "pod": "Perl’s Plain Old Documentation",
+        "pod": "Perl's Plain Old Documentation",
         "ris": "RIS bibliography",
         "rtf": "Rich Text Format",
         "rst": "reStructuredText",
@@ -112,7 +112,7 @@
         "jats_publishing": "JATS XML, Journal Publishing Tag Set",
         "json": "JSON version of native AST",
         "latex": "LaTeX",
-        "markdown": "Pandoc’s Markdown",
+        "markdown": "Pandoc's Markdown",
         "markdown_mmd": "MultiMarkdown",
         "markdown_phpextra": "PHP Markdown Extra",
         "markdown_strict": "original unextended Markdown",
