@@ -15,7 +15,7 @@ steps:
   - task: PowerShell@2
     displayName: Prepare extension for packaging
     inputs:
-      filePath: "$(System.DefaultWorkingDirectory)/ci/PrepareForPackaging.ps1"
+      filePath: "$(System.DefaultWorkingDirectory)/pipelines/scripts/PrepareForPackaging.ps1"
 
   - task: TfxInstaller@5
     displayName: "Install Azure DevOps tools"
