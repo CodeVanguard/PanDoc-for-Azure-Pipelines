@@ -1,0 +1,24 @@
+{
+  "id": "32750f70-d31e-4713-808d-05bde706d27a",
+  "name": "DownloadPanDoc",
+  "friendlyName": "Download PanDoc",
+  "description": "Downloads the PanDoc tool",
+  "author": "Code Vanguard",
+  "helpMarkDown": "Downloads the PanDoc tool.",
+  "category": "Azure Pipelines",
+  "visibility": ["Build"],
+  "demands": [],
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 0
+  },
+  "minimumAgentVersion": "2.132",
+  "instanceNameFormat": "Download PanDoc",
+  "inputs": [],
+  "execution": {
+    "PowerShell3": {
+      "target": "DownloadPanDoc.ps1"
+    }
+  }
+}

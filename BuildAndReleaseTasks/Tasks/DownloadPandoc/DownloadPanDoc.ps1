@@ -1,4 +1,4 @@
-﻿# This file is part of PanDoc for Azure Pipelines,
+# This file is part of PanDoc for Azure Pipelines,
 # Copyright (C) 2025 Lukas Grützmacher
 #
 # PanDoc for Azure Pipelines is free software: you can redistribute it and/or modify

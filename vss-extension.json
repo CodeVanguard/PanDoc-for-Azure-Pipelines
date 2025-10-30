@@ -71,6 +71,16 @@
   ],
   "contributions": [
     {
+      "id": "DownloadPanDoc",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "BuildAndReleaseTasks/Tasks/DownloadPanDoc"
+      }
+    },
+    {
       "id": "RunPanDoc",
       "type": "ms.vss-distributed-task.task",
       "targets": [
