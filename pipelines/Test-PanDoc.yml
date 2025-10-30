@@ -7,7 +7,9 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: RunPanDoc@1
+- task: DownloadPanDoc@2
+
+- task: RunPanDoc@2
   inputs:
     sourceFile: '$(System.DefaultWorkingDirectory)/Test/test.md'
     inputFormat: 'gfm'
