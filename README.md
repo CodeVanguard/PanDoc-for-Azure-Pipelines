@@ -40,6 +40,6 @@ Below are the arguments for the task, and the [corresponding argument in Pandoc]
 | destFile     | The (full) path where to save the new file.      | -o                                         |
 
 # License 
-Copyright (C) 2020-2022 Code Vanguard LLC
+Copyright (C) 2020-2025 Code Vanguard LLC
 
 All rights reserved

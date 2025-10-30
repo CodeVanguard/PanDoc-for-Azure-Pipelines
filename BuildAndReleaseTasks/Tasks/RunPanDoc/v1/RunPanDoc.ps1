@@ -1,5 +1,5 @@
 # This file is part of PanDoc for Azure Pipelines,
-# Copyright (C) 2020-2022 Code Vanguard LLC
+# Copyright (C) 2020-2025 Code Vanguard LLC
 #
 # PanDoc for Azure Pipelines is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 Write-Verbose 'Entering RunPanDoc.ps1'
 
 Write-Host "Build and release tools brought to you by Code Vanguard. For more help on your build and release process, reach out to us at https://www.codevanguard.com"
-Write-Host "Copyright (C) 2020-2022 Code Vanguard LLC"
+Write-Host "Copyright (C) 2020-2025 Code Vanguard LLC"
 
 #Get Parameters
 $sourceFile = Get-VstsInput -Name sourceFile -Require
