@@ -35,12 +35,14 @@ Below is a sample YAML entry for executing the PanDoc tool.
 
 Below are the arguments for the task, and the [corresponding argument in Pandoc](https://pandoc.org/MANUAL.html#general-options)
 
-| Argument     | Description                                      | Corresponding PanDoc Command Line Argument |
-|--------------|--------------------------------------------------|--------------------------------------------|
-| sourceFile   | The (full) path to one or more files to convert. |                                            |
-| inputFormat  | The format of the source file.                   | -f                                         |
-| outputFormat | The format of the destination file.              | -t                                         |
-| destFile     | The (full) path where to save the new file.      | -o                                         |
+| Argument         | Description                                         | Corresponding PanDoc Command Line Argument |
+|------------------|-----------------------------------------------------|--------------------------------------------|
+| sourceFile       | The path to one or more files to convert.           |                                            |
+| inputFormat      | The format of the source file.                      | -f                                         |
+| outputFormat     | The format of the destination file.                 | -t                                         |
+| destFile         | The (full) path where to save the new file.         | -o                                         |
+| workingDirectory | The working directory where the command will be run |                                            |
+| additionalArgs   | Additional arguments to pass along to pandoc        |                                            |
 
 # License 
 Copyright (C) 2020-2025 Code Vanguard LLC
