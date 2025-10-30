@@ -15,6 +15,7 @@ steps:
     inputFormat: 'gfm'
     outputFormat: 'html5'
     destFile: '$(Build.ArtifactStagingDirectory)/README.html'
+    additionalArgs: '--resource-path=$(System.DefaultWorkingDirectory)'
     workingDirectory: $(Pipeline.Workspace)
 
 - task: RunPanDoc@2
@@ -23,6 +24,7 @@ steps:
     inputFormat: 'gfm'
     outputFormat: 'docx'
     destFile: '$(Build.ArtifactStagingDirectory)/README.docx'
+    additionalArgs: '--resource-path=$(System.DefaultWorkingDirectory)'
     workingDirectory: $(Pipeline.Workspace)
 
 - task: PublishBuildArtifacts@1
