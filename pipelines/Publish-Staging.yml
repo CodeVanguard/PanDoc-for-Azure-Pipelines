@@ -46,7 +46,13 @@ stages:
 
   jobs:
     - job: InstallStaging
-      steps:
+      displayName: "Install staging version"
+      steps:      
+        - task: TfxInstaller@5
+          displayName: "Install Azure DevOps tools"
+          inputs:
+            version: builtin
+
         - task: InstallAzureDevOpsExtension@5
           inputs:
             connectTo: 'VsTeam'
@@ -56,7 +62,12 @@ stages:
             extensionId: 'pandoc-staging'
             accounts: 'https://dev.azure.com/CodeVanguard'
 
+    - job: RunTool
+      displayName: "Running latest version of tool"
+
+      steps:      
         - task: DownloadPanDoc@2
+        
           displayName: "Downloading PanDoc"
 
         - task: RunPanDoc@2
