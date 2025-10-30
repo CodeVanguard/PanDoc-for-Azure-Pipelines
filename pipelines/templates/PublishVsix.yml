@@ -1,0 +1,36 @@
+parameters:
+  - name: VsixName
+    type: string
+
+steps:
+  - task: TfxInstaller@5
+    displayName: "Install Azure DevOps tools"
+    inputs:
+      version: builtin
+
+  - task: DownloadPipelineArtifact@2
+    displayName: "Download VSIX"
+    inputs:
+      buildType: 'current'
+      artifactName: 'drop'
+      targetPath: '$(Pipeline.Workspace)'
+
+  - task: PublishAzureDevOpsExtension@5
+    displayName: "Publish extension"
+    inputs:
+      connectTo: "VsTeam"
+      connectedServiceName: "Marketplace Connection"
+      fileType: "vsix"
+      vsixFile: "$(Pipeline.Workspace)/${{ parameters.VsixName }}"
+      extensionVersion: "$(Build.BuildNumber)"
+      extensionVisibility: 'private'
+      extensionPricing: 'free'
+      updateTasksVersion: true
+      noWaitValidation:  true
+
+  - task: IsAzureDevOpsExtensionValid@5
+    inputs:
+      connectTo: 'VsTeam'
+      connectedServiceName: "Marketplace Connection"
+      method: 'vsix'
+      vsixFile: "$(Pipeline.Workspace)/${{ parameters.VsixName }}"

@@ -1,0 +1,43 @@
+parameters:
+  - name: vsixName
+    type: string
+  - name: extensionName
+    type: string
+  - name: extensionId
+    type: string
+  - name: extensionVisibility
+    type: string
+    values:
+    - private  
+    - public 
+    
+steps:
+  - task: PowerShell@2
+    displayName: Prepare extension for packaging
+    inputs:
+      filePath: "$(System.DefaultWorkingDirectory)/ci/PrepareForPackaging.ps1"
+
+  - task: TfxInstaller@5
+    displayName: "Install Azure DevOps tools"
+    inputs:
+      version: builtin
+
+  - task: PackageAzureDevOpsExtension@5
+    displayName: Pacakage extension
+    inputs:
+      rootFolder: "$(System.DefaultWorkingDirectory)"
+      patternManifest: "vss-extension.json"
+      outputPath: ${{ parameters.vsixName }}
+      updateTasksVersion: true
+      updateTasksVersionType: patch
+      extensionVisibility: ${{ parameters.extensionVisibility }}
+      extensionPricing: "free"
+      extensionVersion: "$(Build.BuildNumber)"
+      extensionId: ${{ parameters.extensionId }}
+      extensionName: ${{ parameters.extensionName }}
+
+  - task: CopyFiles@2
+    displayName: Copy VSIX to artifacts staging directory
+    inputs:
+      Contents: "**/*.vsix"
+      TargetFolder: "$(Build.ArtifactStagingDirectory)"

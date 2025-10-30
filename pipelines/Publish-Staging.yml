@@ -1,0 +1,42 @@
+trigger: none
+
+pool:
+  vmImage: "windows-latest"
+  
+variables:
+  VsixName: "CodeVanguard.pandoc-staging.vsix" # $(VsixName)
+
+stages:
+- stage: DeployToStaging
+  displayName: "Deploy to Staging"
+
+  jobs:
+  - job: Build
+    steps: 
+    - template: templates/VersionBuild.yml
+
+    - template: templates/PreparePackage.yml
+      parameters:
+        vsixName: $(VsixName)
+        extensionName: "PanDoc Tools - Staging"
+        extensionId: "pandoc-staging"
+        extensionVisibility: "private"
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish build artifacts
+      inputs:
+        PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+        ArtifactName: "drop"
+        publishLocation: "Container"
+
+  - deployment: Publish
+    displayName: "Deploy staging"
+    environment: "Staging"
+    dependsOn: 'Build'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: templates/PublishVsix.yml
+            parameters:
+              VsixName: $(VsixName)
