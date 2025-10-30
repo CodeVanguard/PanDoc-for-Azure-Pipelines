@@ -26,18 +26,41 @@ Write-Host "Moving VSTSTaskLib to tasks"
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 Write-Host "Script Path: $scriptPath"
 
-$tasks = Get-ChildItem $scriptPath\..\BuildAndReleaseTasks\Tasks -directory
+$tasksRoot = Join-Path $scriptPath '..\BuildAndReleaseTasks\Tasks'
+$tasks = Get-ChildItem -Path $tasksRoot -Directory
+$vstsLibSource = Join-Path $scriptPath '..\BuildAndReleaseTasks\Lib\VstsTaskSdk\*\*.*'
 
 foreach ($task in $tasks) {
-  $path = "$scriptPath\..\BuildAndReleaseTasks\Tasks\$task\ps_modules"
-  If (!(test-path $path)) {
-    New-Item -ItemType Directory -Force -Path $path
-  }
+    # Check for versioned child folders (e.g., v1, v2) by presence of task.json
+    $childDirs = Get-ChildItem -Path $task.FullName -Directory -ErrorAction SilentlyContinue
 
-  $path = "$scriptPath\..\BuildAndReleaseTasks\Tasks\$task\ps_modules\VstsTaskSdk"
-  If (!(test-path $path)) {
-    New-Item -ItemType Directory -Force -Path $path
-  }
+    $versionDirs = @()
+    foreach ($child in $childDirs) {
+        if (Test-Path (Join-Path $child.FullName 'task.json')) {
+            $versionDirs += $child 
+        }
+    }
 
-  Copy-Item -Path $scriptPath\..\BuildAndReleaseTasks\Lib\VstsTaskSdk\0.21.0\*.* -Destination "$path" -Force
+    $targets = @()
+    if ($versionDirs.Count -gt 0) {
+        $targets = $versionDirs
+    }
+    else {
+        $targets = @($task)
+    }
+
+    foreach ($target in $targets) {
+        $psModulesPath = Join-Path $target.FullName 'ps_modules'
+        if (!(Test-Path $psModulesPath)) { 
+            New-Item -ItemType Directory -Force -Path $psModulesPath | Out-Null 
+        }
+
+        $sdkDestPath = Join-Path $psModulesPath 'VstsTaskSdk'
+        if (!(Test-Path $sdkDestPath)) {
+            New-Item -ItemType Directory -Force -Path $sdkDestPath | Out-Null 
+        }
+
+        Copy-Item -Path $vstsLibSource -Destination $sdkDestPath -Force
+        Write-Host "Copied VstsTaskSdk to $sdkDestPath"
+    }
 }

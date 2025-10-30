@@ -20,19 +20,42 @@
 
 $ErrorActionPreference = "Stop"
 
-Write-Host "Moving VSTSTaskLib to tasks"
+Write-Host "Copying icon.png to tasks (handles versioned task folders)"
 
-#Script Location
+# Script Location
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 Write-Host "Script Path: $scriptPath"
 
-$tasks = Get-ChildItem $scriptPath\..\BuildAndReleaseTasks\Tasks -directory
+$tasksRoot = Join-Path $scriptPath '..\BuildAndReleaseTasks\Tasks'
+$tasks = Get-ChildItem -Path $tasksRoot -Directory
+$iconSource = Join-Path $scriptPath '..\icon.png'
 
 foreach ($task in $tasks) {
-  $path = "$scriptPath\..\BuildAndReleaseTasks\Tasks\$task\icon.png"
-  If ((test-path $path)) {
-    Remove-Item $path -Force
-  }
+    # Detect versioned subfolders by presence of task.json
+    $childDirs = Get-ChildItem -Path $task.FullName -Directory -ErrorAction SilentlyContinue
 
-  Copy-Item -Path "$scriptPath\..\icon.png" -Destination "$path" -Force
+    $versionDirs = @()
+    foreach ($child in $childDirs) {
+        if (Test-Path (Join-Path $child.FullName 'task.json')) { 
+            $versionDirs += $child 
+        }
+    }
+
+    $targets = @()
+    if ($versionDirs.Count -gt 0) {
+        $targets = $versionDirs
+    }
+    else {
+        $targets = @($task)
+    }
+
+    foreach ($target in $targets) {
+        $destIcon = Join-Path $target.FullName 'icon.png'
+        if (Test-Path $destIcon) {
+            Remove-Item $destIcon -Force
+        }
+        
+        Copy-Item -Path $iconSource -Destination $destIcon -Force
+        Write-Host "Copied icon to $destIcon"
+    }
 }

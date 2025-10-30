@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
   "id": "32750f70-d31e-4713-808d-05bde706d27a",
   "name": "RunPanDoc",
   "friendlyName": "Run PanDoc",
@@ -6,12 +7,14 @@
   "author": "Code Vanguard",
   "helpMarkDown": "Runs the PanDoc tool using the provided configuration.",
   "category": "Azure Pipelines",
-  "visibility": ["Build"],
+  "visibility": [
+    "Build"
+  ],
   "demands": [],
   "version": {
-    "Major": "1",
-    "Minor": "0",
-    "Patch": "0"
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 0
   },
   "minimumAgentVersion": "2.132",
   "instanceNameFormat": "Run PanDoc",
@@ -66,7 +69,7 @@
         "odt": "OpenDocument text document",
         "opml": "OPML",
         "org": "Emacs Org mode",
-        "pod": "Perl’s Plain Old Documentation",
+        "pod": "Perl's Plain Old Documentation",
         "ris": "RIS bibliography",
         "rtf": "Rich Text Format",
         "rst": "reStructuredText",
@@ -76,7 +79,7 @@
         "twiki": "TWiki markup",
         "typst": "Typst",
         "vimwiki": "Vimwiki",
-        "xml": "XML version of native AST"        
+        "xml": "XML version of native AST"
       },
       "required": true,
       "helpMarkDown": "The source format"
@@ -112,7 +115,7 @@
         "jats_publishing": "JATS XML, Journal Publishing Tag Set",
         "json": "JSON version of native AST",
         "latex": "LaTeX",
-        "markdown": "Pandoc’s Markdown",
+        "markdown": "Pandoc's Markdown",
         "markdown_mmd": "MultiMarkdown",
         "markdown_phpextra": "PHP Markdown Extra",
         "markdown_strict": "original unextended Markdown",

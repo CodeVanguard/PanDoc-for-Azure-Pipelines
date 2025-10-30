@@ -30,8 +30,8 @@ $LibLocation = "$scriptPath/../BuildAndReleaseTasks/Lib"
 Write-Verbose "Installing SDK to $LibLocation"
 
 If ((test-path $LibLocation)) {
-  Write-Verbose "$LibLocation already exists. Removing for a clean installation"
-  Remove-Item $LibLocation -Force -Recurse
+    Write-Verbose "$LibLocation already exists. Removing for a clean installation"
+    Remove-Item $LibLocation -Force -Recurse
 }
 
 mkdir -Path $LibLocation

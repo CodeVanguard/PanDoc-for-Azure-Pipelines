@@ -1,0 +1,13 @@
+steps:
+  - task: CreateVersionVariables@0
+    displayName: Creates the version variables
+    inputs:
+      MajorVersion: "1"
+      MinorVersion: "0"
+      PatchVersion: "$(Build.BuildId)"
+
+    # Rename build
+  - task: RenameBuild@0
+    displayName: Rename build
+    inputs:
+      BuildNumber: "Package Tasks $(VersionNumber)"
