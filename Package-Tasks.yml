@@ -28,11 +28,11 @@ steps:
     inputs:
       filePath: "$(System.DefaultWorkingDirectory)/ci/PrepareForPackaging.ps1"
 
-  - task: TfxInstaller@3
+  - task: TfxInstaller@5
     inputs:
-      version: 'v0.10.x'
+      version: builtin
 
-  - task: PackageAzureDevOpsExtension@3
+  - task: PackageAzureDevOpsExtension@5
     displayName: Pacakage extension
     inputs:
       rootFolder: "$(System.DefaultWorkingDirectory)"
