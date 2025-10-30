@@ -19,10 +19,10 @@
     {
       "name": "sourceFile",
       "type": "string",
-      "label": "Source File",
+      "label": "Source File(s)",
       "defaultValue": "",
       "required": true,
-      "helpMarkDown": "The source file"
+      "helpMarkDown": "One or more source files"
     },
     {
       "name": "inputFormat",
