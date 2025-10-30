@@ -21,4 +21,4 @@ Write-Host "Downloading Pandoc"
 choco install pandoc -y
 
 # Set output variable for the Pandoc path
-Write-Host "##vso[task.setvariable variable=PanDocDownloaded]true"
+Write-Host "##vso[task.setvariable variable=PandocInstalled]true"
