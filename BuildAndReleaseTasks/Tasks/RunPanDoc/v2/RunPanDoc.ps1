@@ -31,11 +31,14 @@ if ($env:PandocInstalled -ne 'true') {
 }
 
 #Get Parameters
-$sourceFiles    = Get-VstsInput -Name sourceFile -Require
+$sourceFiles    = Get-VstsInput -Name sourceFiles -Require
 $inputFormat    = Get-VstsInput -Name inputFormat -Require
 $outputFormat   = Get-VstsInput -Name outputFormat -Require
 $destFile       = Get-VstsInput -Name destFile -Require
 $additionalArgs = Get-VstsInput -Name additionalArgs -Default ""
+
+# Get working directory, default to agent's build directory
+$workingDirectory = Get-VstsInput -Name workingDirectory -Default $env:PIPELINE_WORKSPACE
 
 try {
     $pandocCmd = (Get-Command 'pandoc.exe' -ErrorAction Stop).Path
@@ -51,13 +54,19 @@ Write-Host "Pandoc Version Information:"
 
 Write-Host "`n"
 Write-Host "Local variable information:"
-Write-Host "SourceFile(s): `t`t$sourceFiles"
+Write-Host "SourceFiles: `t`t$sourceFiles"
 Write-Host "InputFormat: `t`t$inputFormat"
 Write-Host "OutputFormat: `t`t$outputFormat"
 Write-Host "DestinationFile: `t$destFile"
 Write-Host "Additional Arguments: `t$additionalArgs"
+Write-Host "Working Directory: `t$workingDirectory"
 
-$commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $additionalArgs"
+# Change to working directory
+Set-Location -Path $workingDirectory
+
+# Run PanDoc
+Write-Host "`n"
+$commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $sourceFiles $additionalArgs"
 Start-Process -FilePath "pandoc.exe" -ArgumentList $commandArgs -NoNewWindow -Wait
 
 Write-Verbose 'Leaving RunPanDoc.ps1'
