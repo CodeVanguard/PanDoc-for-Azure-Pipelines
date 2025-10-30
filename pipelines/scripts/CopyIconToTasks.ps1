@@ -26,9 +26,9 @@ Write-Host "Copying icon.png to tasks (handles versioned task folders)"
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 Write-Host "Script Path: $scriptPath"
 
-$tasksRoot = Join-Path $scriptPath '..\BuildAndReleaseTasks\Tasks'
+$tasksRoot = Join-Path $scriptPath '..\..\BuildAndReleaseTasks\Tasks'
 $tasks = Get-ChildItem -Path $tasksRoot -Directory
-$iconSource = Join-Path $scriptPath '..\icon.png'
+$iconSource = Join-Path $scriptPath '..\..\icon.png'
 
 foreach ($task in $tasks) {
     # Detect versioned subfolders by presence of task.json

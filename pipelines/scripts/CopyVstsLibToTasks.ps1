@@ -26,9 +26,9 @@ Write-Host "Moving VSTSTaskLib to tasks"
 $scriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 Write-Host "Script Path: $scriptPath"
 
-$tasksRoot = Join-Path $scriptPath '..\BuildAndReleaseTasks\Tasks'
+$tasksRoot = Join-Path $scriptPath '..\..\BuildAndReleaseTasks\Tasks'
 $tasks = Get-ChildItem -Path $tasksRoot -Directory
-$vstsLibSource = Join-Path $scriptPath '..\BuildAndReleaseTasks\Lib\VstsTaskSdk\*\*.*'
+$vstsLibSource = Join-Path $scriptPath '..\..\BuildAndReleaseTasks\Lib\VstsTaskSdk\*\*.*'
 
 foreach ($task in $tasks) {
     # Check for versioned child folders (e.g., v1, v2) by presence of task.json
