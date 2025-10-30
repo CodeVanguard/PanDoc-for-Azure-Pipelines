@@ -39,5 +39,5 @@ foreach ($task in $tasks) {
     New-Item -ItemType Directory -Force -Path $path
   }
 
-  Copy-Item -Path $scriptPath\..\BuildAndReleaseTasks\Lib\VstsTaskSdk\0.11.0\*.* -Destination "$path" -Force
+  Copy-Item -Path $scriptPath\..\BuildAndReleaseTasks\Lib\VstsTaskSdk\0.21.0\*.* -Destination "$path" -Force
 }

@@ -56,3 +56,14 @@ steps:
       PathtoPublish: "$(Build.ArtifactStagingDirectory)"
       ArtifactName: "drop"
       publishLocation: "Container"
+
+  - task: PublishAzureDevOpsExtension@5
+    displayName: Publish Extension to Marketplace
+    inputs:
+      connectTo: 'VsTeam'
+      connectedServiceName: 'Marketplace Connection'
+      fileType: 'vsix'
+      vsixFile: '$(Build.ArtifactStagingDirectory)/$(VsixName)'
+      extensionVersion: '$(VersionNumber)'
+      extensionVisibility: 'publicpreview'
+      extensionPricing: 'free'
