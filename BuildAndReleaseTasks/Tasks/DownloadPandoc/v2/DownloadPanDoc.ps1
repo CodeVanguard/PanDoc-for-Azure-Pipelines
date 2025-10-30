@@ -17,8 +17,13 @@
 # 
 # Downloads, verifies and installs PanDoc
 
-Write-Host "Downloading Pandoc"
-choco install pandoc -y
+Write-Host "Downloading Pandoc..."
+
+# Reduce noisy console output from Chocolatey in CI logs
+#  - --no-progress hides the percentage bars
+#  - --limit-output (-r) limits output to essentials
+# NOTE: Avoid using global feature toggles to keep agent state clean
+choco install pandoc -y --no-progress --limit-output
 
 # Set output variable for the Pandoc path
 Write-Host "##vso[task.setvariable variable=PandocInstalled]true"
