@@ -11,17 +11,19 @@ steps:
 
 - task: RunPanDoc@2
   inputs:
-    sourceFile: '$(System.DefaultWorkingDirectory)/README.md'
+    sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
     inputFormat: 'gfm'
     outputFormat: 'html5'
     destFile: '$(Build.ArtifactStagingDirectory)/README.html'
+    workingDirectory: $(Pipeline.Workspace)
 
 - task: RunPanDoc@2
   inputs:
-    sourceFile: '$(System.DefaultWorkingDirectory)/README.md'
+    sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
     inputFormat: 'gfm'
     outputFormat: 'docx'
     destFile: '$(Build.ArtifactStagingDirectory)/README.docx'
+    workingDirectory: $(Pipeline.Workspace)
 
 - task: PublishBuildArtifacts@1
   inputs:
