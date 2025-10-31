@@ -51,7 +51,7 @@ stages:
          - task: InstallPanDoc@2
            displayName: 'Installing PanDoc'
            inputs:
-             version "3.8.0"
+            version: "3.8.0"
 
          - task: RunPanDoc@2
            displayName: 'Converting README.md to HTML5'
