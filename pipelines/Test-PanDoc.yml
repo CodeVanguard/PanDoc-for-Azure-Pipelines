@@ -6,30 +6,73 @@ trigger: none
 pool:
   vmImage: 'windows-latest'
 
-steps:
-- task: InstallPanDoc@2
-  displayName: 'Installing PanDoc'
+stages:
+- stage: TestInstallingLatest
+  displayName: "Test with latest PanDoc"
+  
+  jobs:
+    - job: TestLatest
+      displayName: "Test latest"
+      steps:
+         - task: InstallPanDoc@2
+           displayName: 'Installing PanDoc'
 
-- task: RunPanDoc@2
-  displayName: 'Converting README.md to HTML5'
-  inputs:
-    sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
-    inputFormat: 'gfm'
-    outputFormat: 'html5'
-    destFile: '$(Build.ArtifactStagingDirectory)/README.html'
-    workingDirectory: $(System.DefaultWorkingDirectory)
+         - task: RunPanDoc@2
+           displayName: 'Converting README.md to HTML5'
+           inputs:
+            sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
+            inputFormat: 'gfm'
+            outputFormat: 'html5'
+            destFile: '$(Build.ArtifactStagingDirectory)/README.html'
+            workingDirectory: $(System.DefaultWorkingDirectory)
 
-- task: RunPanDoc@2
-  displayName: 'Converting README.md to DOCX'
-  inputs:
-    sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
-    inputFormat: 'gfm'
-    outputFormat: 'docx'
-    destFile: '$(Build.ArtifactStagingDirectory)/README.docx'
-    workingDirectory: $(System.DefaultWorkingDirectory)
+         - task: RunPanDoc@2
+           displayName: 'Converting README.md to DOCX'
+           inputs:
+            sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
+            inputFormat: 'gfm'
+            outputFormat: 'docx'
+            destFile: '$(Build.ArtifactStagingDirectory)/README.docx'
+            workingDirectory: $(System.DefaultWorkingDirectory)
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+         - task: PublishBuildArtifacts@1
+           inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
+
+- stage: TestSpecificVersion
+  displayName: "Test with specific version of PanDoc"
+  
+  jobs:
+    - job: Test8_2
+      displayName: "Test PanDoc 8.2"
+      steps:
+         - task: InstallPanDoc@2
+           displayName: 'Installing PanDoc'
+           inputs:
+            version: "3.8.0"
+
+         - task: RunPanDoc@2
+           displayName: 'Converting README.md to HTML5'
+           inputs:
+            sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
+            inputFormat: 'gfm'
+            outputFormat: 'html5'
+            destFile: '$(Build.ArtifactStagingDirectory)/README.html'
+            workingDirectory: $(System.DefaultWorkingDirectory)
+
+         - task: RunPanDoc@2
+           displayName: 'Converting README.md to DOCX'
+           inputs:
+            sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
+            inputFormat: 'gfm'
+            outputFormat: 'docx'
+            destFile: '$(Build.ArtifactStagingDirectory)/README.docx'
+            workingDirectory: $(System.DefaultWorkingDirectory)
+
+         - task: PublishBuildArtifacts@1
+           inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'

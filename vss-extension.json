@@ -56,10 +56,6 @@
   "files": [
     {
       "path": "BuildAndReleaseTasks/Tasks"
-    },
-    {
-      "path": "images",
-      "addressable": true
     }
   ],
   "badges": [
