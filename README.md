@@ -2,23 +2,30 @@
 
 An Azure Pipeline task that allows you to run the [PanDoc](https://pandoc.org/) tool in your pipelines.
 
-# Usage
-The extensions supports use of the assistant view to help you to configure your PanDoc.
-
-![Assistant view](images/assistant.PNG)
-
-The assistant will help you to choose the supported input and output formats.
-
-![Format parameters](images/formats.PNG)
-
-# Installing PanDoc
+## Installing PanDoc
 If you do not have PanDoc already installed on your build agent, we've included a step which will download and install the latest version. Run the `InstallPanDoc` step to make sure the latest version of PanDoc is running.
 
 ```yaml
 - task: InstallPanDoc@2
 ```
 
-# Sample 
+You can also specify the specific version of PanDoc you would like to install by using the `version` argument.
+
+```yaml
+- task: InstallPanDoc@2
+  inputs:
+    version: "3.8.0"
+```
+
+Underneath, this step is using chocolaty. If you want to see which versions are acceptable, run the following command:
+
+```ps
+choco search --exact pandoc --all
+```
+
+## Running PanDoc 
+
+To run PanDoc, use the `RunPanDoc` task.
 
 Below is a sample YAML entry for executing the PanDoc tool.
 
@@ -35,7 +42,7 @@ Below is a sample YAML entry for executing the PanDoc tool.
     workingDirectory: '$(System.DefaultWorkingDirectory)'
 ```
 
-# Arguments
+### Arguments
 
 Below are the arguments for the task, and the [corresponding argument in Pandoc](https://pandoc.org/MANUAL.html#general-options)
 
