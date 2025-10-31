@@ -49,14 +49,13 @@ stages:
     - job: RunTool
       displayName: "Running latest version of tool"
       steps:      
-        - task: DownloadPanDoc@2
-        
-          displayName: "Downloading PanDoc"
+        - task: InstallPanDoc@2
+          displayName: "Installing PanDoc"
 
         - task: RunPanDoc@2
           displayName: "Testing PanDoc"
           inputs:
-            sourceFile: '$(System.DefaultWorkingDirectory)/Test/test.md'
+            sourceFiles: '$(System.DefaultWorkingDirectory)/Test/test.md'
             inputFormat: 'gfm'
             outputFormat: 'html5'
             destFile: '$(Build.ArtifactStagingDirectory)/test.html'

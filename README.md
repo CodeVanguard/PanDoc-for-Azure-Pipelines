@@ -11,14 +11,18 @@ The assistant will help you to choose the supported input and output formats.
 
 ![Format parameters](images/formats.PNG)
 
-# Sample 
+# Installing PanDoc
+If you do not have PanDoc already installed on your build agent, we've included a step which will download and install the latest version. Run the `InstallPanDoc` step to make sure the latest version of PanDoc is running.
 
-Before using the `RunPanDoc` tool, run the `DownloadPanDoc` stage. This will install the latest version of PanDoc.
+```yaml
+- task: InstallPanDoc@2
+```
+
+# Sample 
 
 Below is a sample YAML entry for executing the PanDoc tool.
 
 ```yaml
-- task: DownloadPanDoc@2
 
 - task: RunPanDoc@2
   displayName: Convert Github Markdown to HTML
@@ -31,7 +35,7 @@ Below is a sample YAML entry for executing the PanDoc tool.
     workingDirectory: '$(System.DefaultWorkingDirectory)'
 ```
 
-# Argument
+# Arguments
 
 Below are the arguments for the task, and the [corresponding argument in Pandoc](https://pandoc.org/MANUAL.html#general-options)
 
