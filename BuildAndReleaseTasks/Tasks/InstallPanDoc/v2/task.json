@@ -18,7 +18,14 @@
     },
     "minimumAgentVersion": "2.132",
     "instanceNameFormat": "Install PanDoc",
-    "inputs": [],
+    "inputs": [{
+      "name": "version",
+      "type": "string",
+      "label": "PanDoc Version",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Specify the version of PanDoc to install. If not specified, the latest version will be installed."
+    }],
     "execution": {
         "PowerShell3": {
             "target": "InstallPanDoc.ps1"

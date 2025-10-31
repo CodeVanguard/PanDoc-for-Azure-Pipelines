@@ -19,11 +19,21 @@
 
 Write-Host "Installing Pandoc..."
 
-# Reduce noisy console output from Chocolatey in CI logs
-#  - --no-progress hides the percentage bars
-#  - --limit-output (-r) limits output to essentials
-# NOTE: Avoid using global feature toggles to keep agent state clean
-choco install pandoc -y --no-progress --limit-output
+$targetVersion = Get-VstsInput -Name version -Default ""
+
+# Build a single argument list and invoke choco once
+$chocoArgs = @('install', 'pandoc', '-y', '--no-progress', '--limit-output')
+
+if ($targetVersion -ne "") {
+    Write-Host "Installing specified Pandoc version: $targetVersion"
+    $chocoArgs += @('--version', $targetVersion)
+}
+else {
+    Write-Host "No specific version provided. Installing latest Pandoc version."
+}
+
+# Single invocation to avoid duplication
+& choco @chocoArgs
 
 # Set output variable for the Pandoc path
 Write-Host "##vso[task.setvariable variable=PandocInstalled]true"
