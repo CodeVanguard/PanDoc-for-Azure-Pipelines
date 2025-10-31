@@ -7,9 +7,11 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
-- task: DownloadPanDoc@2
+- task: InstallPanDoc@2
+  displayName: 'Installing PanDoc'
 
 - task: RunPanDoc@2
+  displayName: 'Converting README.md to HTML5'
   inputs:
     sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
     inputFormat: 'gfm'
@@ -18,6 +20,7 @@ steps:
     workingDirectory: $(System.DefaultWorkingDirectory)
 
 - task: RunPanDoc@2
+  displayName: 'Converting README.md to DOCX'
   inputs:
     sourceFiles: '$(System.DefaultWorkingDirectory)/README.md'
     inputFormat: 'gfm'
