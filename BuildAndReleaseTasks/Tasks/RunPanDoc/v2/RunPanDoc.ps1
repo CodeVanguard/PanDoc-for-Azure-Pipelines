@@ -24,9 +24,12 @@ Write-Verbose 'Entering RunPanDoc.ps1'
 Write-Host "Build and release tools brought to you by Code Vanguard. For more help on your build and release process, reach out to us at https://www.codevanguard.com"
 Write-Host "Copyright (C) 2020-2025 Code Vanguard LLC"
 
-# Ensure Download task ran
-if ($env:PandocInstalled -ne 'true') {
-    Write-Error "Please run the DownloadPanDoc task before this task."
+# Ensure Pandoc is available: resolve pandoc.exe on PATH
+try {
+    $pandocCmd = (Get-Command 'pandoc.exe' -ErrorAction Stop).Path
+}
+catch {
+    Write-Error "pandoc.exe not found in PATH. Install Pandoc or run the InstallPanDoc task to install it."
     exit 1
 }
 
@@ -39,14 +42,6 @@ $additionalArgs = Get-VstsInput -Name additionalArgs -Default ""
 
 # Get working directory, default to agent's build directory
 $workingDirectory = Get-VstsInput -Name workingDirectory -Default $env:PIPELINE_WORKSPACE
-
-try {
-    $pandocCmd = (Get-Command 'pandoc.exe' -ErrorAction Stop).Path
-}
-catch {
-    Write-Error "pandoc.exe not found in PATH. Ensure the DownloadPanDoc task completed successfully."
-    exit 1
-}
 
 Write-Host "`n"
 Write-Host "Pandoc Version Information:"
@@ -67,6 +62,6 @@ Set-Location -Path $workingDirectory
 # Run PanDoc
 Write-Host "`n"
 $commandArgs = "-f $inputFormat -t $outputFormat -o $destFile $sourceFiles $additionalArgs"
-Start-Process -FilePath "pandoc.exe" -ArgumentList $commandArgs -NoNewWindow -Wait
+Start-Process -FilePath $pandocCmd -ArgumentList $commandArgs -NoNewWindow -Wait
 
 Write-Verbose 'Leaving RunPanDoc.ps1'
