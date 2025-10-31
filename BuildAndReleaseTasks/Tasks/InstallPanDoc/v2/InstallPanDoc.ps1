@@ -1,5 +1,5 @@
 # This file is part of PanDoc for Azure Pipelines,
-# Copyright (C) 2025 Lukas Grützmacher
+# Copyright (C) 2025 Code Vanguard
 #
 # PanDoc for Azure Pipelines is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 3 as
@@ -13,11 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with PanDoc for Azure Pipelines.  If not, see <http://www.gnu.org/licenses/>.
 
-# DownloadPandoc.ps1
-# 
-# Downloads, verifies and installs PanDoc
+# InstallPandoc.ps1
+#
+# Installs PanDoc
 
-Write-Host "Downloading Pandoc..."
+Write-Host "Installing Pandoc..."
 
 # Reduce noisy console output from Chocolatey in CI logs
 #  - --no-progress hides the percentage bars

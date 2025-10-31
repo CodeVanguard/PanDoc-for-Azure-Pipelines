@@ -1,0 +1,27 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "6e493779-6936-48ab-82c1-dff74322cacc",
+    "name": "InstallPanDoc",
+    "friendlyName": "Install PanDoc",
+    "description": "Installs the PanDoc tool to the build agent.",
+    "author": "Code Vanguard",
+    "helpMarkDown": "Installs the PanDoc tool to the build agent.",
+    "category": "Azure Pipelines",
+    "visibility": [
+        "Build"
+    ],
+    "demands": [],
+    "version": {
+        "Major": 2,
+        "Minor": 0,
+        "Patch": 0
+    },
+    "minimumAgentVersion": "2.132",
+    "instanceNameFormat": "Install PanDoc",
+    "inputs": [],
+    "execution": {
+        "PowerShell3": {
+            "target": "InstallPanDoc.ps1"
+        }
+    }
+}
